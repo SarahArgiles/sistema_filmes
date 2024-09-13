@@ -8,7 +8,7 @@
         <hr>
         <a href="{{route('index')}}">Inicial</a>
         |
-        <a href="{{route('animais')}}">Filmes</a>
+        <a href="{{route('filmes')}}">Filmes</a>
         |
         @if (Auth::user() && Auth::user()['admin'])
         <a href="{{route('usuarios')}}">Usuários</a>

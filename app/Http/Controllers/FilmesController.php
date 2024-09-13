@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filmes;
 use Illuminate\Http\Request;
 
 class FilmesController extends Controller
 {
     public function index() {
-        $dados = Filme::all();
+        $dados = Filmes::all();
         
         return view('filmes.index', [
             'filmes' => $dados,
@@ -19,26 +20,30 @@ class FilmesController extends Controller
     }
 
     public function gravar(Request $form) {
-        $img = $form->file('imagem')->store('animais', 'imagem');
+        $img = $form->file('imagem')->store('filmes', 'imagem');
         
         $dados = $form->validate([
             'nome' => 'required|min:3',
+            'sinopse' => 'required|min:3',
+            'ano' => 'required',
+            'categoria' => 'required',
+            'link' => 'required|min:3',
         
         ]);
         $dados['imagem'] =$img; 
 
-        Filme::create($dados);
+        Filmes::create($dados);
         
         return redirect()->route('filmes');
     }
 
-    public function apagar(Filme $filme) {
+    public function apagar(Filmes $filme) {
         return view('filmes.apagar', [
             'filme' => $filme,
         ]);
     }
 
-    public function deletar(Filme $filme) {
+    public function deletar(Filmes $filme) {
         $filme->delete();
         return redirect()->route('filmes');
     }

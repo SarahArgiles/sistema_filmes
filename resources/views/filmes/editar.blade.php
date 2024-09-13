@@ -31,13 +31,13 @@
         <input value="{{ old('sinopse', $filme->sinopse ?? '') }}" type="text" name="sinopse" placeholder="Sinopse" value="">
     </p>
     <p>
-        <input value="{{ old('usuario', $filme->ano ?? '') }}" type="date" name="ano" placeholder="Ano" value="">
+        <input value="{{ old('ano', $filme->ano ?? '') }}" type="date" name="ano" placeholder="Ano" value="">
     </p>
      <p>
-        <input value="{{ old('senha', $filme->categoria ?? '') }}" type="text" name="categoria" placeholder="Categoria" value="">
+        <input value="{{ old('categoria', $filme->categoria ?? '') }}" type="text" name="categoria" placeholder="Categoria" value="">
     </p>
     <p>
-        <input value="{{ old('admin', $filme->link?? '') }}" type="text" name="link" placeholder="link" value="">
+        <input value="{{ old('link', $filme->link?? '') }}" type="text" name="link" placeholder="link" value="">
     </p>
 
 

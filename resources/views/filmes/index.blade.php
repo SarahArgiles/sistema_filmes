@@ -18,7 +18,10 @@
     @foreach ($filmes as $filme)
     <tr>
         <td>{{ $filme['nome'] }}</td>
-        <td>{{ $filme['idade'] }}</td>
+        <td>{{ $filme['sinopse'] }}</td>
+        <td>{{ $filme['ano'] }}</td>
+        <td>{{ $filme['categoria'] }}</td>
+        <td>{{ $filme['link'] }}</td>
         <td><a href="{{ route('filmes.apagar', $filme['id']) }}">Apagar</a></td>
     </tr>
     @endforeach

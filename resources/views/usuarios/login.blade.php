@@ -26,6 +26,10 @@
         <input class="" id="password" name="password" type="text" required="" placeholder="Senha" aria-label="password">
     </div>
     <div class="">
+        <label for="email">Email</label>
+        <input class="" id="email" name="email" type="email" required="" placeholder="email" aria-label="email">
+    </div>
+    <div class="">
         <button class="" type="submit">Enviar</button>
     </div>
     
