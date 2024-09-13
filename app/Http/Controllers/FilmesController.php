@@ -20,7 +20,7 @@ class FilmesController extends Controller
     }
 
     public function gravar(Request $form) {
-        $img = $form->file('imagem')->store('filmes', 'imagem');
+        $img = $form->file('imagem')->store('filmes', 'imagens');
         
         $dados = $form->validate([
             'nome' => 'required|min:3',
