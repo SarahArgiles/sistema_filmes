@@ -64,5 +64,15 @@ class UsuariosController extends Controller
         Auth::logout();
         return redirect()->route('index');
     }
+    public function apagar(usuarios $usuario) {
+        return view('usuarios.apagar', [
+            'usuario' => $usuario,
+        ]);
+    }
+
+    public function deletar(usuarios $usuario) {
+        $usuario->delete();
+        return redirect()->route('usuarios');
+    }
 }
 
