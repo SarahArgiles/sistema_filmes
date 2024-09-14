@@ -25,9 +25,7 @@ Route::put('/filmes/editar/{filme}', [FilmesController::class, 'editarGravar']);
 Route::prefix('usuarios')->middleware('auth')->group(function() {
     Route::get('/', [UsuariosController::class, 'index'])->name('usuarios');
 
-    Route::get('/cadastrar', [UsuariosController::class, 'create'])->name('usuarios.inserir');
     
-    Route::post('/cadastrar', [UsuariosController::class, 'insert'])->name('usuarios.gravar');
     
     Route::get('/apagar/{usuario}', [UsuariosController::class, 'remove'])->name('usuarios.apagar');
 
@@ -36,8 +34,13 @@ Route::prefix('usuarios')->middleware('auth')->group(function() {
     Route::put('/editar/{usuario}', [FilmesController::class, 'editarGravar']);
 });
 
-Route::get('login', [UsuariosController::class, 'login'])->name('login');
+Route::get('/cadastrar', [UsuariosController::class, 'create'])->name('usuarios.cadastrar');
+    
+Route::post('/cadastrar', [UsuariosController::class, 'insert'])->name('usuarios.gravar');
 
-Route::post('login', [UsuariosController::class, 'login']);
+Route::get('/login', [UsuariosController::class, 'login'])->name('login');
+
+Route::post('/login', [UsuariosController::class, 'login']);
 
 Route::get('logout', [UsuariosController::class, 'logout'])->name('logout');
+

@@ -9,7 +9,6 @@ class FilmesController extends Controller
 {
     public function index() {
         $dados = Filmes::all();
-        
         return view('filmes.index', [
             'filmes' => $dados,
         ]);
@@ -20,21 +19,25 @@ class FilmesController extends Controller
     }
 
     public function gravar(Request $form) {
-        $img = $form->file('imagem')->store('filmes', 'imagens');
-        
+        // Validação dos dados
         $dados = $form->validate([
             'nome' => 'required|min:3',
             'sinopse' => 'required|min:3',
             'ano' => 'required',
             'categoria' => 'required',
             'link' => 'required|min:3',
-        
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
         ]);
-        $dados['imagem'] =$img; 
 
+        // Armazenar a imagem
+        $img = $form->file('imagem')->store('filmes', 'public');
+        $dados['imagem'] = $img;
+
+        // Criar o registro no banco de dados
         Filmes::create($dados);
-        
-        return redirect()->route('filmes');
+
+        // Adicionar o caminho da imagem à sessão
+        return redirect()->route('filmes')->with('image', $img);
     }
 
     public function apagar(Filmes $filme) {
@@ -48,3 +51,5 @@ class FilmesController extends Controller
         return redirect()->route('filmes');
     }
 }
+
+

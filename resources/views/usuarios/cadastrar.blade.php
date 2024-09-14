@@ -1,68 +1,55 @@
 @extends('base')
 
-@section('titulo', 'Cadastrar | Animais para adoção')
+@section('titulo', 'Cadastrar | Cadastro de usuários')
 
 @section('conteudo')
-<p>Preencha o formulário</p>
+<div class="container mt-5">
+    <p class="mb-4">Preencha o formulário</p>
 
-@if($errors->any())
-<div>
-    <h4>Deu ruim</h4>
-    @foreach($errors->all() as $erro)
-        <p>{{ $erro }}</p>
-    @endforeach
-</div>  
-@endif
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <h4>Deu ruim</h4>
+            @foreach($errors->all() as $erro)
+                <p>{{ $erro }}</p>
+            @endforeach
+        </div>  
+    @endif
 
-
-{{-- <form method="post" action="{{ route('usuarios.gravar') }}">
-    @csrf
-    <input type="text" id="nome" name="name" placeholder="Nome" value="{{ old('name') }}">
-    <br>
-    <input type="email" id="email"  name="email" placeholder="E-mail" value="{{ old('email') }}">
-    <br>
-    <input type="text" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
-    <br>
-    <input type="password" id="password" name="password" placeholder="Senha" value="{{ old('password') }}">
-    <br>
-    Admin
-    <select name="admin">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-    </select>
-    <br>
-    <input type="submit" value="Gravar">
-</form> --}}
-
-
-@endsection 
-        <div class="flex flex-wrap">
-        <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
-            <p class="text-xl pb-6 flex items-center">
-                <i class="fas fa-list mr-3"></i> Cadastrar usuario
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <p class="text-xl pb-6">
+                <i class="fas fa-list mr-3"></i> Cadastrar usuário
             </p>
-            <div class="leading-loose">
-                <form class="p-10 bg-white rounded shadow-xl" method="post" action="{{ route('usuarios.gravar') }}">
-                @csrf
-                <div class="">
-                <input type="text" id="nome" name="name" placeholder="Nome" value="{{ old('name') }}">
-                <br>
-                <input type="email" id="email"  name="email" placeholder="E-mail" value="{{ old('email') }}">
-                <br>
-                <input type="text" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
-                <br>
-                <input type="password" id="password" name="password" placeholder="Senha" value="{{ old('password') }}">
-                <br>
-                Admin
-                <select name="admin">
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
-                </select>
-                <br>
-                <input type="submit" value="Gravar">
-                </div>
+            <div class="card p-4 shadow-sm">
+                <form method="post" action="{{ route('usuarios.gravar') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="name" class="form-control" placeholder="Nome" value="{{ old('name') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" value="{{ old('email') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="{{ old('username') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Senha">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin">Admin</label>
+                        <select id="admin" name="admin" class="form-control">
+                            <option value="0" {{ old('admin') == 0 ? 'selected' : '' }}>Não</option>
+                            <option value="1" {{ old('admin') == 1 ? 'selected' : '' }}>Sim</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gravar</button>
                 </form>
             </div>
-            </div>
-                @endsection
-
+        </div>
+    </div>
+</div>
+@endsection

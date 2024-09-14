@@ -43,11 +43,9 @@ class UsuariosController extends Controller
 
             // Pega os dados do formulário
             $credenciais = $form->validate([
-                'name' => 'required',
-                'email' => 'required',
                 'username' => 'required',
                 'password' => 'required',
-                'admin' => 'required',
+
 
             ]);
 
@@ -67,3 +65,4 @@ class UsuariosController extends Controller
         return redirect()->route('index');
     }
 }
+
