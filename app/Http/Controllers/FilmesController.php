@@ -20,7 +20,6 @@ class FilmesController extends Controller
 
     public function gravar(Request $form)
     {
-       
         $dados = $form->validate([
             'nome' => 'required|min:3',
             'sinopse' => 'required|min:3',
@@ -28,23 +27,21 @@ class FilmesController extends Controller
             'categoria' => 'required',
             'link' => 'required|min:3',
             'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            
         ]);
     
         if ($form->hasFile('imagem')) {
             $img = $form->file('imagem')->store('filmes', 'public');
             $dados['imagem'] = $img;
         } else {
-            $dados['imagem'] = null; // Garantir que imagem é nula se não foi enviada
+            $dados['imagem'] = null; 
         }
         
-        // Criar o registro no banco de dados
+       
         Filmes::create($dados);
         
-        // Adicionar o caminho da imagem à sessão
+        
         return redirect()->route('filmes')->with('image', $img);
     }
-    
 
     public function apagar(Filmes $filme) {
         return view('filmes.apagar', [
@@ -56,8 +53,38 @@ class FilmesController extends Controller
         $filme->delete();
         return redirect()->route('filmes');
     }
+
+    
+    public function editar(Filmes $filme) {
+        return view('filmes.editar', [
+            'filme' => $filme,
+        ]);
+    }
+
+    
+    public function editarGravar(Request $form, Filmes $filme) {
+        $dados = $form->validate([
+            'nome' => 'required|min:3',
+            'sinopse' => 'required|min:3',
+            'ano' => 'required|date',
+            'categoria' => 'required|min:3',
+            'link' => 'required|url',
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        
+        if ($form->hasFile('imagem')) {
+            
+            if ($filme->imagem) {
+                \Storage::disk('public')->delete($filme->imagem);
+            }
+            $img = $form->file('imagem')->store('filmes', 'public');
+            $dados['imagem'] = $img;
+        }
+        
+        
+        $filme->update($dados);
+        
+        return redirect()->route('filmes')->with('success', 'Filme atualizado com sucesso!');
+    }
 }
-
-
-
-

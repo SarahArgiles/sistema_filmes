@@ -41,6 +41,7 @@
                         <a href="{{ $filme->link }}" target="_blank">{{ $filme->link }}</a>
                     </td>
                     <td>
+                        <a href="{{ route('filmes.editar', $filme->id) }}" class="btn btn-warning btn-sm">Editar</a>
                         <a href="{{ route('filmes.apagar', $filme->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja apagar este filme?')">Apagar</a>
                     </td>
                 </tr>
@@ -50,6 +51,3 @@
     </div>
 </div>
 @endsection
-
-
-
